@@ -30,6 +30,10 @@ public class Enemy : MonoBehaviour
         // Disable enemy
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
+        for (int i = 0; i <= 30000; i++)
+        {
+
+        }
         Destroy(gameObject);
 
     }
