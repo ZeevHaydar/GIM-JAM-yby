@@ -20,10 +20,6 @@ public class PlayerCombat : MonoBehaviour
                 MeleeAttack();
                 attackTime = Time.time + attackSpeed;
             }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                RangeAttack();
-            }
         }
 
     }
@@ -42,10 +38,7 @@ public class PlayerCombat : MonoBehaviour
             enemy.GetComponent<Enemy>().TakeDamage(20);
         }
     }
-    void RangeAttack()
-    {
 
-    }
 
     void OnDrawGizmosSelected()
     {

@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
         // Disable enemy
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
+        Destroy(gameObject);
 
     }
 }
