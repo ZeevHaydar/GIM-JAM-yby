@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.GameOverOrPause()) return;
+        
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(projectile, shotPoint.position, quaternion.identity);
@@ -40,11 +42,13 @@ public class Player : MonoBehaviour
             Die();
         }
         
+        AudioManager.instance.PlaySFX("Player Hit");
         healthStat.UpdateHealth(_currentHealth, maxHealth);
     }
 
     void Die()
     {
+        GameManager.instance.isGameOver = true;
         Destroy(gameObject);
     }
 }

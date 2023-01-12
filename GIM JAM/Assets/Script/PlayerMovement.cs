@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     
     private void processInput()
     {
+        if (GameManager.instance.GameOverOrPause()) return;
+        
         moveDirection = Input.GetAxis("Horizontal"); //get the input
         
         //check jump

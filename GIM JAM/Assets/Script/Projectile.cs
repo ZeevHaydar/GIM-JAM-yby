@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Projectile : MonoBehaviour
 {
     public float speed = 20;
     public float lifetime;
     public int damage;
+    public int damageCrit;
 
     private Rigidbody2D _rigidbody;
     private PlayerMovement _player;
@@ -36,7 +38,7 @@ public class Projectile : MonoBehaviour
         if (hitInfo.CompareTag("Enemy"))
         {
             Boss en = hitInfo.GetComponent<Boss>();
-            en.TakeDamage(damage);
+            en.TakeDamage(Random.Range(0, 100) < 50  ? damage : damageCrit);
             en.Hit();
             
             Destroy(gameObject);

@@ -15,8 +15,14 @@ public class BossHand : MonoBehaviour
     
     private void Update()
     {
+        if (GameManager.instance.GameOverOrPause()) return;
+        
         // apakah posisi y nya itu kurang dari limit?
-        if (transform.position.y < limit) isLimit = false;
+        if (transform.position.y < limit)
+        {
+            AudioManager.instance.PlaySFX("Hand Drop");
+            isLimit = false;
+        }
 
         // posisinya diubah jika islimit true maka jalan turun ke bawah jika islimit false maka ke jalan ke atas
         transform.position +=

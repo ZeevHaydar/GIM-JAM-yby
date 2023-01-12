@@ -52,6 +52,8 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.GameOverOrPause()) return;
+        
         // mengecek targetnya ada atau tidak, jika tidak ada di return;
         if (target == null) return;
         
@@ -114,7 +116,19 @@ public class Boss : MonoBehaviour
         if (_curHP <= 0)
         {
             _curHP = 0;
+            
+            GameManager.instance.isGameOver = true;
+            GameManager.instance.isWin = true;
+            
+            AudioManager.instance.PlaySFX("Bos Dead");
+            AudioManager.instance.bgmSource.pitch = 1f;
+
             Destroy(gameObject);
+        }
+
+        if (_curHP <= (baseHP * 40 / 100))
+        {
+            AudioManager.instance.bgmSource.pitch = 1.3f;
         }
         
         healthBar.UpdateHealth(_curHP, baseHP);
@@ -122,6 +136,7 @@ public class Boss : MonoBehaviour
 
     public void Hit()
     {
+        AudioManager.instance.PlaySFX("Bin Cilling");
         _animator.SetTrigger("Hit");
     }
     

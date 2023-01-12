@@ -9,7 +9,12 @@ public class EnemyProjectile : MonoBehaviour
     public float speed;
 
     // drop
-    private void Update() => transform.position += Vector3.down * speed * Time.deltaTime;
+    private void Update()
+    {
+        if (GameManager.instance.GameOverOrPause()) return;
+        
+        transform.position += Vector3.down * speed * Time.deltaTime;
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -20,6 +25,7 @@ public class EnemyProjectile : MonoBehaviour
         
         else if (col.CompareTag("Ground"))
         {
+            AudioManager.instance.PlaySFX("Ice Cream Hit");
             Destroy(gameObject);
         }
     }
